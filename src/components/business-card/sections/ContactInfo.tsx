@@ -70,6 +70,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ businessCard }) => (
         )}
       </dl>
     </div>
+    <img src="..." alt="Description of image" />
   </>
 );
 

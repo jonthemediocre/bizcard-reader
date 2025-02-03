@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Upload, Loader2, Scan, AlertCircle, RefreshCw } from 'lucide-react';
 import axios from 'axios';
 
@@ -160,6 +160,8 @@ const OCRScanner: React.FC = () => {
       }
     }
   };
+
+  const memoizedValue = useMemo(() => computeExpensiveValue(dependencies), [dependencies]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

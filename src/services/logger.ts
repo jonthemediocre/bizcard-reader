@@ -138,6 +138,7 @@ class Logger {
       fileName: file.name,
       fileSize: file.size,
       fileType: file.type,
+      timestamp: new Date().toISOString()
     });
   }
 

@@ -127,7 +127,7 @@ export const extractBusinessCardData = async (imageBase64: string): Promise<Busi
 
     // Ensure required fields are present
     if (!parsedCard.personName || !parsedCard.companyName || !parsedCard.jobTitle) {
-      throw new Error('Failed to extract required information from the business card');
+      throw new Error('Missing required fields: personName, companyName, or jobTitle');
     }
 
     // Ensure phones is always an array
@@ -144,7 +144,11 @@ export const extractBusinessCardData = async (imageBase64: string): Promise<Busi
 
     return parsedCard;
   } catch (error) {
-    logger.error('Failed to extract business card data', {}, error);
+    logger.error('Failed to extract business card data', {
+      errorMessage: error.message,
+      stack: error.stack,
+      imageBase64Length: imageBase64.length
+    }, error);
     throw error;
   }
 };
