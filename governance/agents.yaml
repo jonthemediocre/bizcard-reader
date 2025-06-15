@@ -1,0 +1,207 @@
+# 🤖 Agent Registry - Business Card Reader
+# Version: 2.3
+# Status: ACTIVE
+# Last Updated: 2024-12-19
+
+metadata:
+  project: "bizcard-reader"
+  version: "2.3"
+  governance_level: "STRICT"
+  agent_framework: "MCP-wrapped"
+
+# Core Agent Definitions
+agents:
+  # OCR Processing Agent
+  - id: "OCRAgent"
+    name: "Optical Character Recognition Agent"
+    type: "processing"
+    status: "active"
+    capabilities:
+      - "text_extraction"
+      - "image_preprocessing"
+      - "ocr_optimization"
+    mcp_functions:
+      - name: "extractText"
+        description: "Extract text from business card images"
+        input_schema: "ImageInput"
+        output_schema: "ExtractedText"
+      - name: "preprocessImage"
+        description: "Optimize image for OCR processing"
+        input_schema: "ImageInput"
+        output_schema: "ProcessedImage"
+    dependencies:
+      - "tesseract.js"
+      - "openai-vision-api"
+    performance_metrics:
+      - "extraction_accuracy"
+      - "processing_time"
+      - "error_rate"
+    
+  # Pattern Recognition Agent
+  - id: "PatternAgent"
+    name: "Business Card Pattern Recognition Agent"
+    type: "analysis"
+    status: "active"
+    capabilities:
+      - "name_detection"
+      - "contact_extraction"
+      - "company_identification"
+    mcp_functions:
+      - name: "extractPatterns"
+        description: "Identify business card patterns in text"
+        input_schema: "RawText"
+        output_schema: "ExtractedPatterns"
+      - name: "validatePatterns"
+        description: "Validate extracted pattern accuracy"
+        input_schema: "ExtractedPatterns"
+        output_schema: "ValidationResult"
+    dependencies:
+      - "regex-patterns"
+      - "ml-models"
+    performance_metrics:
+      - "pattern_accuracy"
+      - "false_positive_rate"
+      - "coverage_rate"
+    
+  # Data Validation Agent
+  - id: "ValidationAgent"
+    name: "Data Validation and Cleanup Agent"
+    type: "validation"
+    status: "active"
+    capabilities:
+      - "data_validation"
+      - "format_standardization"
+      - "quality_scoring"
+    mcp_functions:
+      - name: "validateBusinessCard"
+        description: "Validate extracted business card data"
+        input_schema: "BusinessCardData"
+        output_schema: "ValidationReport"
+      - name: "cleanupData"
+        description: "Clean and standardize extracted data"
+        input_schema: "RawBusinessCardData"
+        output_schema: "CleanBusinessCardData"
+    dependencies:
+      - "validation-rules"
+      - "data-formatters"
+    performance_metrics:
+      - "validation_accuracy"
+      - "cleanup_effectiveness"
+      - "data_quality_score"
+    
+  # API Enrichment Agent
+  - id: "EnrichmentAgent"
+    name: "External API Data Enrichment Agent"
+    type: "enrichment"
+    status: "active"
+    capabilities:
+      - "company_lookup"
+      - "person_search"
+      - "social_profile_matching"
+    mcp_functions:
+      - name: "enrichWithAPI"
+        description: "Enrich business card data with external APIs"
+        input_schema: "BusinessCardData"
+        output_schema: "EnrichedData"
+      - name: "searchCompanyInfo"
+        description: "Search for company information"
+        input_schema: "CompanyQuery"
+        output_schema: "CompanyInfo"
+    dependencies:
+      - "openai-api"
+      - "search-apis"
+    performance_metrics:
+      - "enrichment_success_rate"
+      - "api_response_time"
+      - "data_accuracy"
+    
+  # Export and Formatting Agent
+  - id: "ExportAgent"
+    name: "Data Export and Formatting Agent"
+    type: "output"
+    status: "active"
+    capabilities:
+      - "format_conversion"
+      - "export_generation"
+      - "template_application"
+    mcp_functions:
+      - name: "exportData"
+        description: "Export business card data in various formats"
+        input_schema: "BusinessCardData"
+        output_schema: "ExportedData"
+      - name: "generateVCard"
+        description: "Generate vCard format"
+        input_schema: "BusinessCardData"
+        output_schema: "VCardData"
+    dependencies:
+      - "export-formatters"
+      - "template-engine"
+    performance_metrics:
+      - "export_success_rate"
+      - "format_compliance"
+      - "generation_speed"
+
+# Agent Interaction Patterns
+interactions:
+  - name: "standard_processing_pipeline"
+    description: "Standard business card processing workflow"
+    sequence:
+      - agent: "OCRAgent"
+        function: "extractText"
+      - agent: "PatternAgent"
+        function: "extractPatterns"
+      - agent: "ValidationAgent"
+        function: "validateBusinessCard"
+      - agent: "EnrichmentAgent"
+        function: "enrichWithAPI"
+      - agent: "ExportAgent"
+        function: "exportData"
+    
+  - name: "validation_retry_loop"
+    description: "Retry loop for failed validations"
+    sequence:
+      - agent: "ValidationAgent"
+        function: "validateBusinessCard"
+      - condition: "validation_failed"
+        retry_with: "PatternAgent.extractPatterns"
+        max_retries: 3
+
+# Performance Monitoring
+monitoring:
+  metrics:
+    - name: "pipeline_success_rate"
+      target: "> 95%"
+      alert_threshold: "< 90%"
+    - name: "average_processing_time"
+      target: "< 5 seconds"
+      alert_threshold: "> 10 seconds"
+    - name: "agent_error_rate"
+      target: "< 2%"
+      alert_threshold: "> 5%"
+  
+  logging:
+    level: "INFO"
+    include_performance: true
+    include_errors: true
+    retention_days: 30
+
+# Security and Compliance
+security:
+  api_key_management: "secure_storage"
+  data_encryption: "at_rest_and_transit"
+  audit_logging: "enabled"
+  access_control: "role_based"
+
+# Agent Lifecycle Management
+lifecycle:
+  deployment_strategy: "blue_green"
+  rollback_capability: "enabled"
+  health_checks: "continuous"
+  auto_scaling: "disabled"  # Frontend only
+
+# Integration Points
+integrations:
+  mcp_server: "localhost:3001"
+  logging_service: "internal"
+  monitoring_service: "internal"
+  storage_service: "browser_local" 

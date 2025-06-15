@@ -1,0 +1,144 @@
+# 🎨 Visual Trace Index - Business Card Reader
+# Version: 2.3
+# Status: ACTIVE
+# Last Updated: 2024-12-19
+
+metadata:
+  project: "bizcard-reader"
+  version: "2.3"
+  governance_level: "STRICT"
+  visual_first_policy: true
+
+# Visual Asset Registry
+visual_assets:
+  # Core UI Components
+  - id: "main-scanner-interface"
+    type: "component"
+    status: "approved"
+    path: "src/components/OCRScanner.tsx"
+    visual_reference: "designs/scanner-interface.figma"
+    description: "Main business card scanning interface"
+    linked_code:
+      - "src/components/OCRScanner.tsx:1-255"
+    approval_date: "2024-12-19"
+    
+  - id: "upload-dropzone"
+    type: "component"
+    status: "approved"
+    path: "src/components/common/UploadZone.tsx"
+    visual_reference: "designs/upload-components.figma"
+    description: "File upload and drag-drop interface"
+    linked_code:
+      - "src/components/OCRScanner.tsx:150-180"
+    approval_date: "2024-12-19"
+    
+  - id: "processing-states"
+    type: "component"
+    status: "approved"
+    path: "src/components/common/LoadingStates.tsx"
+    visual_reference: "designs/loading-states.figma"
+    description: "Loading and processing state indicators"
+    linked_code:
+      - "src/components/OCRScanner.tsx:45-65"
+    approval_date: "2024-12-19"
+
+  # Business Card Display Components
+  - id: "business-card-preview"
+    type: "component"
+    status: "pending"
+    path: "src/components/business-card/CardPreview.tsx"
+    visual_reference: "designs/card-display.figma"
+    description: "Business card information display"
+    linked_code: []
+    approval_date: null
+    
+  - id: "extracted-data-form"
+    type: "component"
+    status: "pending"
+    path: "src/components/business-card/DataForm.tsx"
+    visual_reference: "designs/data-forms.figma"
+    description: "Editable form for extracted business card data"
+    linked_code: []
+    approval_date: null
+
+  # Settings and Configuration
+  - id: "settings-panel"
+    type: "component"
+    status: "approved"
+    path: "src/components/Settings.tsx"
+    visual_reference: "designs/settings-ui.figma"
+    description: "Application settings and API configuration"
+    linked_code:
+      - "src/components/Settings.tsx:1-104"
+    approval_date: "2024-12-19"
+
+# Agent Visual Mappings
+agent_visuals:
+  - agent_id: "OCRAgent"
+    visual_assets:
+      - "main-scanner-interface"
+      - "processing-states"
+    status: "approved"
+    
+  - agent_id: "PatternAgent"
+    visual_assets:
+      - "business-card-preview"
+      - "extracted-data-form"
+    status: "pending"
+    
+  - agent_id: "ValidationAgent"
+    visual_assets:
+      - "extracted-data-form"
+    status: "pending"
+
+# Code-to-Visual Enforcement Rules
+enforcement_rules:
+  - rule: "no_orphan_components"
+    description: "All React components must have linked visual assets"
+    severity: "error"
+    
+  - rule: "visual_approval_required"
+    description: "Components cannot be deployed without visual approval"
+    severity: "error"
+    
+  - rule: "design_system_compliance"
+    description: "All components must follow approved design system"
+    severity: "warning"
+
+# Pending Visual Assets (Need Creation)
+pending_visuals:
+  - id: "error-states"
+    type: "component"
+    description: "Error handling and display components"
+    priority: "high"
+    
+  - id: "export-options"
+    type: "component"
+    description: "Data export and sharing interfaces"
+    priority: "medium"
+    
+  - id: "batch-processing"
+    type: "component"
+    description: "Multiple card processing interface"
+    priority: "low"
+
+# Validation Status
+validation:
+  last_check: "2024-12-19T00:00:00Z"
+  orphaned_components: []
+  unapproved_components:
+    - "src/components/business-card/CardPreview.tsx"
+    - "src/components/business-card/DataForm.tsx"
+  compliance_score: 0.75
+  
+# CoE Approval Log
+approvals:
+  - asset_id: "main-scanner-interface"
+    approved_by: "DesignCoE"
+    date: "2024-12-19"
+    notes: "Initial approval for existing component"
+    
+  - asset_id: "settings-panel"
+    approved_by: "DesignCoE"
+    date: "2024-12-19"
+    notes: "Approved with minor accessibility improvements needed" 
