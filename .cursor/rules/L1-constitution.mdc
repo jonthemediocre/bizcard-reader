@@ -3,3 +3,149 @@ description:
 globs:
 alwaysApply: false
 ---
+# 🏛️ L1 CONSTITUTIONAL RULES - IMMUTABLE GOVERNANCE
+**Level**: L1 (Constitutional - Immutable)
+**Status**: ENFORCED
+**Version**: 6.0
+**Authority**: Supreme - Cannot be overridden by L2/L3
+
+---
+
+## 🔒 **CONSTITUTIONAL MANDATES**
+
+### **MANDATE 1: MCP UNIVERSALITY**
+```yaml
+rule: "Every function MUST be MCP-wrapped"
+enforcement: STRICT
+exceptions: NONE
+validation: |
+  - All functions must have MCPTool decorator
+  - All functions must be registered in MCP registry
+  - All functions must have proper input/output schemas
+  - No direct function calls allowed outside MCP system
+```
+
+### **MANDATE 2: AGENT COMPLIANCE**
+```yaml
+rule: "Every agent MUST be UAP 3.1+ compliant"
+enforcement: STRICT
+exceptions: NONE
+validation: |
+  - All agents must extend UAP31Agent base class
+  - All agents must implement A2A endpoints
+  - All agents must have evolution capabilities
+  - All agents must follow governance hierarchy
+```
+
+### **MANDATE 3: COMPONENT UNIVERSALITY**
+```yaml
+rule: "Every component MUST have universal primitive"
+enforcement: STRICT
+exceptions: NONE
+validation: |
+  - All UI components must have cross-platform implementations
+  - All components must follow accessibility standards
+  - All components must be testable
+  - All components must have proper documentation
+```
+
+### **MANDATE 4: SECURITY PRIMACY**
+```yaml
+rule: "Security > Performance > Features"
+enforcement: ABSOLUTE
+exceptions: NONE
+validation: |
+  - No security regressions allowed
+  - All inputs must be validated
+  - All outputs must be sanitized
+  - All secrets must be properly managed
+```
+
+### **MANDATE 5: GOVERNANCE HIERARCHY**
+```yaml
+rule: "No rule at L2/L3 can violate L1"
+enforcement: ABSOLUTE
+exceptions: NONE
+validation: |
+  - L2 rules must be compatible with L1
+  - L3 implementations must follow L2 patterns
+  - Violations trigger immediate rollback
+  - All changes must pass L1 compliance check
+```
+
+---
+
+## 🛡️ **ENFORCEMENT MECHANISMS**
+
+### **Pre-Commit Hooks**
+- L1 compliance validation
+- MCP coverage verification
+- Security regression detection
+- Component universality check
+
+### **Runtime Validation**
+- Continuous L1 rule monitoring
+- Automatic violation detection
+- Immediate rollback on violations
+- Performance impact assessment
+
+### **Audit Requirements**
+- Daily L1 compliance reports
+- Weekly security assessments
+- Monthly governance reviews
+- Quarterly constitutional updates
+
+---
+
+## 📊 **COMPLIANCE METRICS**
+
+### **Required Scores**
+- L1 Compliance: 100% (no exceptions)
+- MCP Coverage: 100% (all functions)
+- Security Score: >95% (minimum)
+- Component Universality: 100% (all platforms)
+
+### **Violation Handling**
+- **Level 1**: Immediate system halt
+- **Level 2**: Automatic rollback
+- **Level 3**: Alert and quarantine
+- **Level 4**: Log and monitor
+
+---
+
+## 🔄 **CONSTITUTIONAL AMENDMENTS**
+
+### **Amendment Process**
+1. **Proposal**: Must come from CoE (Council of Engineers)
+2. **Review**: 30-day review period
+3. **Validation**: Impact assessment required
+4. **Approval**: Unanimous CoE vote required
+5. **Implementation**: Phased rollout with monitoring
+
+### **Amendment History**
+- v6.0: Initial constitutional framework
+- Future amendments will be logged here
+
+---
+
+## 🚨 **EMERGENCY PROTOCOLS**
+
+### **Constitutional Crisis**
+If L1 rules conflict or become impossible to enforce:
+1. Immediate system freeze
+2. Emergency CoE session
+3. Temporary suspension of conflicting rules
+4. Emergency amendment process
+5. System restoration with new rules
+
+### **Security Breach**
+If security mandate is violated:
+1. Immediate lockdown
+2. Forensic analysis
+3. Vulnerability patching
+4. Security audit
+5. Gradual system restoration
+
+---
+
+**This constitution is the supreme law of the codebase. All other rules, patterns, and implementations must conform to these mandates. Violation of L1 rules is considered a critical system failure.**
