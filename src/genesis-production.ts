@@ -166,25 +166,24 @@ async function executeGenesisProduction(config: ProductionConfig): Promise<Produ
     // Phase 5: Monitoring Setup (if enabled)
     if (config.enableMonitoring) {
       logger.info('📊 Phase 5: Setting up Production Monitoring');
-      const monitoringResult = await startGenesisMonitoring({
-        interval: config.environment === 'production' ? 30000 : 60000, // 30s for prod, 1m for others
-        alerts: {
-          enabled: true,
-          channels: ['email', 'slack'],
-          escalation: config.environment === 'production'
-        },
-        dashboard: {
-          enabled: true,
-          port: 3001,
-          auth: config.environment === 'production'
-        }
-      });
-      
-      result.phases.monitoring = monitoringResult;
-      result.metrics.monitoringActive = monitoringResult.success;
-
-      if (!monitoringResult.success) {
-        logger.warn('⚠️ Monitoring setup failed - continuing without monitoring');
+      try {
+        const monitoringEngine = await startGenesisMonitoring({
+          enableHealthChecks: true,
+          enablePerformanceMetrics: true,
+          enableErrorTracking: true,
+          alertThresholds: {
+            errorRate: config.environment === 'production' ? 0.01 : 0.05,
+            responseTime: config.environment === 'production' ? 500 : 1000,
+            memoryUsage: config.environment === 'production' ? 256 : 512
+          }
+        });
+        
+        result.phases.monitoring = { success: true, engine: monitoringEngine };
+        result.metrics.monitoringActive = true;
+      } catch (error) {
+        logger.warn('⚠️ Monitoring setup failed - continuing without monitoring', { error: error instanceof Error ? error.message : String(error) });
+        result.phases.monitoring = { success: false, error: error instanceof Error ? error.message : String(error) };
+        result.metrics.monitoringActive = false;
         result.recommendations.push('Fix monitoring setup for production visibility');
       }
     }
