@@ -16,11 +16,9 @@ import type {
  * Comprehensive testing engine with multi-dimensional test coverage
  */
 export class TestEngine {
-  private config: TestConfig;
   private metrics: TestMetrics;
 
-  constructor(config: TestConfig) {
-    this.config = config;
+  constructor(_config: TestConfig) {
     this.metrics = {
       totalTests: 0,
       passedTests: 0,

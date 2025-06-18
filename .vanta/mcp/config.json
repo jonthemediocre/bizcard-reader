@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "vanta-universal": {
+      "command": "python",
+      "args": [
+        "C:\\Users\\Jonbr\\pinokio\\api\\bizcard-reader\\.vanta\\mcp\\vanta_mcp_server.py"
+      ],
+      "env": {
+        "VANTA_PROJECT_UUID": "1c5a0ad2-0f18-4e8b-bd4c-88d28fff76c8",
+        "VANTA_API_BASE": "https://api.vanta.ai/v3/projects/1c5a0ad2-0f18-4e8b-bd4c-88d28fff76c8",
+        "VANTA_MASTER_KEY": "${VANTA_MASTER_API_KEY}"
+      }
+    }
+  }
+}

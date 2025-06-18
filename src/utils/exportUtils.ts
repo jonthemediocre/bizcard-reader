@@ -1,4 +1,5 @@
 import type { BusinessCard, APIResponse } from '../types/business-card';
+import { BusinessCardData } from '../types/business-card';
 
 export const generateCSV = (card: BusinessCard, additionalDetails?: APIResponse | null): string => {
   const headers = [
@@ -119,5 +120,57 @@ export const downloadFile = (content: string, filename: string, type: string) =>
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+};
+
+export const exportToPDF = async (data: BusinessCardData): Promise<void> => {
+  // Mock PDF export implementation
+  const pdfContent = `
+Business Card Data:
+Name: ${data.name}
+Title: ${data.title}
+Company: ${data.company}
+Email: ${data.email}
+Phone: ${data.phone}
+  `;
+  
+  const blob = new Blob([pdfContent], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${(data.name || 'business_card').replace(/\s+/g, '_')}_business_card.txt`;
+  link.click();
+  URL.revokeObjectURL(url);
+};
+
+export const exportToCSV = async (data: BusinessCardData): Promise<void> => {
+  const csvContent = `Name,Title,Company,Email,Phone
+"${data.name || ''}","${data.title || ''}","${data.company || ''}","${data.email || ''}","${data.phone || ''}"`;
+  
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${(data.name || 'business_card').replace(/\s+/g, '_')}_business_card.csv`;
+  link.click();
+  URL.revokeObjectURL(url);
+};
+
+export const exportToVCard = async (data: BusinessCardData): Promise<void> => {
+  const vCardContent = `BEGIN:VCARD
+VERSION:3.0
+FN:${data.name || ''}
+TITLE:${data.title || ''}
+ORG:${data.company || ''}
+EMAIL:${data.email || ''}
+TEL:${data.phone || ''}
+END:VCARD`;
+  
+  const blob = new Blob([vCardContent], { type: 'text/vcard' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${(data.name || 'business_card').replace(/\s+/g, '_')}_business_card.vcf`;
+  link.click();
   URL.revokeObjectURL(url);
 };

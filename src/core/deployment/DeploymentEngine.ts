@@ -6,14 +6,58 @@
  */
 
 import { logger } from '../../services/logger';
-import type { 
-  DeploymentConfig, 
-  DeploymentResult, 
-  Platform, 
-  BuildTarget,
-  EnvironmentConfig,
-  DeploymentMetrics
-} from '../genesis/types';
+
+// Type definitions
+interface DeploymentConfig {
+  platforms: Platform[];
+  environment: 'development' | 'staging' | 'production';
+  buildOptions: {
+    optimize: boolean;
+    minify: boolean;
+    sourceMaps: boolean;
+    treeshake: boolean;
+  };
+  testOptions: {
+    unit: boolean;
+    integration: boolean;
+    e2e: boolean;
+    performance: boolean;
+    accessibility: boolean;
+    security: boolean;
+  };
+  deploymentOptions: {
+    rollback: boolean;
+    monitoring: boolean;
+    healthChecks: boolean;
+    smokeTests: boolean;
+  };
+}
+
+interface DeploymentMetrics {
+  buildTime: number;
+  deployTime: number;
+  testTime: number;
+  bundleSize: number;
+  performanceScore: number;
+  securityScore: number;
+  accessibilityScore: number;
+}
+
+interface DeploymentResult {
+  success: boolean;
+  platforms: Platform[];
+  environment: string;
+  metrics: DeploymentMetrics;
+  timestamp: string;
+  duration: number;
+  error?: string;
+}
+
+interface EnvironmentConfig {
+  environment: 'development' | 'staging' | 'production';
+}
+
+type Platform = 'web' | 'mobile' | 'desktop';
 
 /**
  * Production deployment engine with cross-platform support

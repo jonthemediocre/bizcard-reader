@@ -1,0 +1,194 @@
+# 🧠 GENESIS META LOOP v4Σ.9 – SEMANTIC CONSOLIDATOR EDITION
+# Recursive build–fix–test–design–ship loop with hybrid semantic search
+
+version: "4Σ.9"
+edition: "SEMANTIC_CONSOLIDATOR"
+timestamp: "2025-01-18T10:30:00Z"
+uap_version: "3.1"
+a2a_protocol: "enabled"
+
+# 🔁 LOOP STACK CONFIGURATION
+loop_stack:
+  Loop_0:
+    name: "Planning (Driver-Seat Mode)"
+    phase: "plan"
+    approval_required: true
+    tasks: ["parse theplan.md", "define next action"]
+    
+  Loop_1:
+    name: "Document Audit"
+    phase: "audit"
+    tasks: ["scan .md files", "consolidate documentation"]
+    
+  Loop_2:
+    name: "Code Audit"
+    phase: "audit"
+    tasks: ["typescript compilation", "lint checks", "dependency analysis"]
+    
+  Loop_3:
+    name: "Completion Review"
+    phase: "review"
+    tasks: ["gap analysis", "quality scorecard"]
+    
+  Loop_4:
+    name: "Fixes + Implementation"
+    phase: "fix"
+    tasks: ["code patches", "dependency fixes", "compilation fixes"]
+    
+  Loop_5:
+    name: "UX Flow Audit"
+    phase: "ux"
+    tasks: ["user journey analysis", "flow optimization"]
+    
+  Loop_6:
+    name: "UI Scaffolding"
+    phase: "ui"
+    tasks: ["component generation", "responsive design", "accessibility"]
+    
+  Loop_7:
+    name: "Orphaned Code Rescue"
+    phase: "rescue"
+    tasks: ["identify unused code", "preserve value", "clean architecture"]
+    
+  Loop_8:
+    name: "Tech Debt Cleanup"
+    phase: "cleanup"
+    tasks: ["refactor", "optimize", "preserve value"]
+    
+  Loop_9:
+    name: "Playwright E2E Testing"
+    phase: "test"
+    tasks: ["e2e tests", "ci integration", "test reporting"]
+    
+  Loop_10:
+    name: "GitHub Push or Remote Backup"
+    phase: "backup"
+    tasks: ["git operations", "remote backup", "version control"]
+    
+  Loop_11:
+    name: "Prompt Feedback"
+    phase: "feedback"
+    tasks: ["app-agnostic suggestions", "prompt optimization"]
+    
+  Loop_12:
+    name: "A2A Agent Collaboration"
+    phase: "collaborate"
+    tasks: ["agent communication", "UAP 3.1 compliance"]
+    
+  Loop_13:
+    name: "Hybrid Semantic Search + .md Consolidation"
+    phase: "consolidate"
+    tasks: ["semantic search", "document consolidation", "knowledge extraction"]
+
+# 🔎 SEMANTIC SEARCH ENGINE
+semantic_search:
+  enabled: true
+  fallback_if_missing: true
+  embedding_model: "openai"
+  combine_methods: ["vector", "keyword"]
+  index_storage: ".vanta/search/memory_index.json"
+  search_patterns:
+    - "*.md"
+    - "*.yaml"
+    - "*.json"
+    - "THEPLAN.md"
+    - "README.md"
+
+# 🔁 LOOP_13 SEMANTIC CONSOLIDATION
+loop_13_semantic_sweep:
+  scan_root_files: "*.md"
+  hybrid_semantic_search:
+    fallback_if_missing: "build_vector+keyword_index"
+    extract: ["tasks", "goals", "symbolic_values"]
+  consolidate_to:
+    theplan: "THEPLAN.md"
+    todo: "dynamic_todo.md"
+    audit_log: "/audits/v4Σ.9-AUDIT-01/md_consolidation_log.yaml"
+
+# 🔁 A2A AGENT COLLABORATION (UAP 3.1)
+a2a_protocol:
+  enabled: true
+  version: "UAP-3.1"
+  agents:
+    genesis_operator:
+      id: "genesis-operator.vanta"
+      version: "4Σ.9"
+      role: "Genesis.Operator"
+      interface: ["audit", "fix", "consolidate"]
+    
+    ui_agent:
+      id: "ui-agent.vanta"
+      version: "1.0.0"
+      role: "UI.Agent"
+      interface: ["component.gen", "design.verify"]
+    
+    ux_agent:
+      id: "ux-agent.vanta"
+      version: "1.0.0"
+      role: "UX.Agent"
+      interface: ["flow.analyze", "journey.optimize"]
+    
+    playwright_agent:
+      id: "playwright-agent.vanta"
+      version: "1.0.0"
+      role: "Test.Agent"
+      interface: ["e2e.test", "report.gen"]
+
+# 📘 REQUIRED OUTPUT FILES
+output_files:
+  audit_report: "audit_report.md"
+  quality_scorecard: "quality_scorecard.json"
+  completion_checklist: "completion_checklist.md"
+  gap_analysis: "gap_analysis.yaml"
+  prompt_upgrade_suggestions: "prompt_upgrade_suggestions.md"
+  md_consolidation_log: "md_consolidation_log.yaml"
+  a2a_log: "a2a_log.yaml"
+  e2e_tests: "/e2e/"
+  fix_output: "/fix_output/"
+  github_workflows: "/.github/workflows/"
+  preserved_code: "/preserved/"
+  backup_snapshot: "/backup/genesis_snapshot.tar.gz"
+
+# 📌 OPERATOR COMMANDS
+operator_commands:
+  ΔGO_PLAN: "Loop_0 - Plan from theplan.md"
+  ΔGO_AUDIT: "Loop_1–3 - Audit + gap assessment"
+  ΔGO_FIX: "Loop_4 - Code patches"
+  ΔGO_TEST: "Loop_5,9 - Run tests (unit + Playwright)"
+  ΔGO_DESIGN: "Loop_6 - UI generation"
+  ΔGO_MAPFLOW: "Loop_5 - UX simulation"
+  ΔGO_PLAY: "Loop_9 - E2E tests via Playwright"
+  ΔGO_CLEAN: "Loop_8 - Safe refactor"
+  ΔGO_BACKUP: "Loop_10 - GitHub or archive"
+  ΔGO_CONSOLIDATE: "Loop_13 - Semantic merge of .mds"
+  ΔGO_FEEDBACK: "Loop_11 - Suggest prompt upgrades"
+  ΔGO_SHIP: "Final push to deploy"
+
+# 🔥 EXECUTION RULES
+execution_rules:
+  enforce_uap_3_1: true
+  must_emit_structured_output: true
+  must_log_all_actions: true
+  must_emit_a2a_calls: "when_task_type_exceeds_scope"
+  must_preserve_symbolic_value: "always"
+  must_sweep_md_and_consolidate: "into_theplan_and_chosen_todo"
+  no_function_wrapping: true
+  recursive_execution: true
+  approval_for_mutations: true
+  real_code_changes: true
+  full_memory_retention: true
+
+# 🚨 ERROR HANDLING
+error_handling:
+  on_test_failure: ["stop", "show_logs", "suggest_fix", "ask_approval"]
+  on_build_failure: ["stop", "analyze_errors", "propose_solution", "await_confirmation"]
+  on_compilation_error: ["identify_root_cause", "apply_fixes", "verify_solution"]
+
+# 📊 CURRENT PROJECT STATUS
+current_status:
+  compilation_errors: 608
+  critical_issues: ["TeamSetup.tsx", "api-security-middleware.ts", "enterprise-ci-cd.yml"]
+  dev_server_status: "running_on_5173"
+  playwright_tests: "failing_due_to_compilation"
+  accessibility_score: 78
+  overall_health: "functional_with_critical_fixes_needed" 

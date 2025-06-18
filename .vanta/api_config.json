@@ -1,0 +1,937 @@
+{
+  "vanta_api_version": "3.0.0",
+  "project_uuid": "1c5a0ad2-0f18-4e8b-bd4c-88d28fff76c8",
+  "api_base_url": "https://api.vanta.ai/v3/projects/1c5a0ad2-0f18-4e8b-bd4c-88d28fff76c8",
+  "master_api_key": "${VANTA_MASTER_API_KEY}",
+  "cli_services": {
+    "cli_001": {
+      "name": "VANTA Code Generator",
+      "endpoint": "/api/vanta/generate/code",
+      "cli_command": "vanta-gen code",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_002": {
+      "name": "Project Template Engine",
+      "endpoint": "/api/vanta/templates",
+      "cli_command": "vanta-template create",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_003": {
+      "name": "API Documentation Generator",
+      "endpoint": "/api/vanta/docs/generate",
+      "cli_command": "vanta-docs build",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_004": {
+      "name": "Database Schema Migrator",
+      "endpoint": "/api/vanta/db/migrate",
+      "cli_command": "vanta-db migrate",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_005": {
+      "name": "Container Orchestrator",
+      "endpoint": "/api/vanta/containers",
+      "cli_command": "vanta-docker deploy",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_006": {
+      "name": "Environment Manager",
+      "endpoint": "/api/vanta/env",
+      "cli_command": "vanta-env setup",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_007": {
+      "name": "Dependency Analyzer",
+      "endpoint": "/api/vanta/deps/analyze",
+      "cli_command": "vanta-deps scan",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_008": {
+      "name": "Performance Profiler",
+      "endpoint": "/api/vanta/perf/profile",
+      "cli_command": "vanta-perf analyze",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_009": {
+      "name": "Security Scanner",
+      "endpoint": "/api/vanta/security/scan",
+      "cli_command": "vanta-sec scan",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_010": {
+      "name": "Compliance Validator",
+      "endpoint": "/api/vanta/compliance/check",
+      "cli_command": "vanta-compliance validate",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_011": {
+      "name": "Secrets Manager",
+      "endpoint": "/mcp/vanta/secrets",
+      "cli_command": "vanta-secrets vault",
+      "protocol": "mcp",
+      "enabled": true
+    },
+    "cli_012": {
+      "name": "Audit Logger",
+      "endpoint": "/api/vanta/audit/log",
+      "cli_command": "vanta-audit trace",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_013": {
+      "name": "Test Generator",
+      "endpoint": "/api/vanta/tests/generate",
+      "cli_command": "vanta-test create",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_014": {
+      "name": "Load Test Runner",
+      "endpoint": "/api/vanta/load/test",
+      "cli_command": "vanta-load run",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_015": {
+      "name": "Code Quality Analyzer",
+      "endpoint": "/api/vanta/quality/check",
+      "cli_command": "vanta-quality scan",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_016": {
+      "name": "Coverage Reporter",
+      "endpoint": "/api/vanta/coverage/report",
+      "cli_command": "vanta-coverage analyze",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_017": {
+      "name": "CI/CD Pipeline Manager",
+      "endpoint": "/api/vanta/cicd/manage",
+      "cli_command": "vanta-cicd deploy",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_018": {
+      "name": "Infrastructure Provisioner",
+      "endpoint": "/api/vanta/infra/provision",
+      "cli_command": "vanta-infra create",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_019": {
+      "name": "Service Mesh Controller",
+      "endpoint": "/grpc/vanta/mesh",
+      "cli_command": "vanta-mesh control",
+      "protocol": "grpc",
+      "enabled": true
+    },
+    "cli_020": {
+      "name": "Log Aggregator",
+      "endpoint": "/api/vanta/logs/aggregate",
+      "cli_command": "vanta-logs collect",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_021": {
+      "name": "AI Model Trainer",
+      "endpoint": "/api/vanta/ai/train",
+      "cli_command": "vanta-ai train",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_022": {
+      "name": "Data Pipeline Orchestrator",
+      "endpoint": "/api/vanta/data/pipeline",
+      "cli_command": "vanta-data flow",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_023": {
+      "name": "API Gateway Manager",
+      "endpoint": "/api/vanta/gateway/manage",
+      "cli_command": "vanta-gateway setup",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_024": {
+      "name": "Backup & Recovery System",
+      "endpoint": "/api/vanta/backup",
+      "cli_command": "vanta-backup create",
+      "protocol": "rest",
+      "enabled": true
+    },
+    "cli_025": {
+      "name": "Universal MCP Bridge",
+      "endpoint": "/mcp/vanta/bridge",
+      "cli_command": "vanta-mcp connect",
+      "protocol": "mcp",
+      "enabled": true
+    }
+  },
+  "guided_services": {
+    "guided_001": {
+      "name": "Business Intelligence Service 1",
+      "endpoint": "/api/vanta/guided/business_intelligence/1",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent1",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_002": {
+      "name": "Business Intelligence Service 2",
+      "endpoint": "/api/vanta/guided/business_intelligence/2",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent2",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_003": {
+      "name": "Business Intelligence Service 3",
+      "endpoint": "/api/vanta/guided/business_intelligence/3",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent3",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_004": {
+      "name": "Business Intelligence Service 4",
+      "endpoint": "/api/vanta/guided/business_intelligence/4",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent4",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_005": {
+      "name": "Business Intelligence Service 5",
+      "endpoint": "/api/vanta/guided/business_intelligence/5",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent5",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_006": {
+      "name": "Business Intelligence Service 6",
+      "endpoint": "/api/vanta/guided/business_intelligence/6",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent6",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_007": {
+      "name": "Business Intelligence Service 7",
+      "endpoint": "/api/vanta/guided/business_intelligence/7",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent7",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_008": {
+      "name": "Business Intelligence Service 8",
+      "endpoint": "/api/vanta/guided/business_intelligence/8",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent8",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_009": {
+      "name": "Business Intelligence Service 9",
+      "endpoint": "/api/vanta/guided/business_intelligence/9",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent9",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_010": {
+      "name": "Business Intelligence Service 10",
+      "endpoint": "/api/vanta/guided/business_intelligence/10",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent10",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_011": {
+      "name": "Business Intelligence Service 11",
+      "endpoint": "/api/vanta/guided/business_intelligence/11",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent11",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_012": {
+      "name": "Business Intelligence Service 12",
+      "endpoint": "/api/vanta/guided/business_intelligence/12",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent12",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_013": {
+      "name": "Business Intelligence Service 13",
+      "endpoint": "/api/vanta/guided/business_intelligence/13",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent13",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_014": {
+      "name": "Business Intelligence Service 14",
+      "endpoint": "/api/vanta/guided/business_intelligence/14",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent14",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_015": {
+      "name": "Business Intelligence Service 15",
+      "endpoint": "/api/vanta/guided/business_intelligence/15",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Business IntelligenceComponent15",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_016": {
+      "name": "Content Management Service 1",
+      "endpoint": "/api/vanta/guided/content_management/1",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent1",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_017": {
+      "name": "Content Management Service 2",
+      "endpoint": "/api/vanta/guided/content_management/2",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent2",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_018": {
+      "name": "Content Management Service 3",
+      "endpoint": "/api/vanta/guided/content_management/3",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent3",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_019": {
+      "name": "Content Management Service 4",
+      "endpoint": "/api/vanta/guided/content_management/4",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent4",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_020": {
+      "name": "Content Management Service 5",
+      "endpoint": "/api/vanta/guided/content_management/5",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent5",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_021": {
+      "name": "Content Management Service 6",
+      "endpoint": "/api/vanta/guided/content_management/6",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent6",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_022": {
+      "name": "Content Management Service 7",
+      "endpoint": "/api/vanta/guided/content_management/7",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent7",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_023": {
+      "name": "Content Management Service 8",
+      "endpoint": "/api/vanta/guided/content_management/8",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent8",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_024": {
+      "name": "Content Management Service 9",
+      "endpoint": "/api/vanta/guided/content_management/9",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent9",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_025": {
+      "name": "Content Management Service 10",
+      "endpoint": "/api/vanta/guided/content_management/10",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent10",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_026": {
+      "name": "Content Management Service 11",
+      "endpoint": "/api/vanta/guided/content_management/11",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent11",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_027": {
+      "name": "Content Management Service 12",
+      "endpoint": "/api/vanta/guided/content_management/12",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Content ManagementComponent12",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_028": {
+      "name": "User Experience Service 1",
+      "endpoint": "/api/vanta/guided/user_experience/1",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "User ExperienceComponent1",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_029": {
+      "name": "User Experience Service 2",
+      "endpoint": "/api/vanta/guided/user_experience/2",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "User ExperienceComponent2",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_030": {
+      "name": "User Experience Service 3",
+      "endpoint": "/api/vanta/guided/user_experience/3",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "User ExperienceComponent3",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_031": {
+      "name": "User Experience Service 4",
+      "endpoint": "/api/vanta/guided/user_experience/4",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "User ExperienceComponent4",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_032": {
+      "name": "User Experience Service 5",
+      "endpoint": "/api/vanta/guided/user_experience/5",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "User ExperienceComponent5",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_033": {
+      "name": "User Experience Service 6",
+      "endpoint": "/api/vanta/guided/user_experience/6",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "User ExperienceComponent6",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_034": {
+      "name": "User Experience Service 7",
+      "endpoint": "/api/vanta/guided/user_experience/7",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "User ExperienceComponent7",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_035": {
+      "name": "User Experience Service 8",
+      "endpoint": "/api/vanta/guided/user_experience/8",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "User ExperienceComponent8",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_036": {
+      "name": "User Experience Service 9",
+      "endpoint": "/api/vanta/guided/user_experience/9",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "User ExperienceComponent9",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_037": {
+      "name": "User Experience Service 10",
+      "endpoint": "/api/vanta/guided/user_experience/10",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "User ExperienceComponent10",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_038": {
+      "name": "Analytics & Reporting Service 1",
+      "endpoint": "/api/vanta/guided/analytics_&_reporting/1",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Analytics & ReportingComponent1",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_039": {
+      "name": "Analytics & Reporting Service 2",
+      "endpoint": "/api/vanta/guided/analytics_&_reporting/2",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Analytics & ReportingComponent2",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_040": {
+      "name": "Analytics & Reporting Service 3",
+      "endpoint": "/api/vanta/guided/analytics_&_reporting/3",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Analytics & ReportingComponent3",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_041": {
+      "name": "Analytics & Reporting Service 4",
+      "endpoint": "/api/vanta/guided/analytics_&_reporting/4",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Analytics & ReportingComponent4",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_042": {
+      "name": "Analytics & Reporting Service 5",
+      "endpoint": "/api/vanta/guided/analytics_&_reporting/5",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Analytics & ReportingComponent5",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_043": {
+      "name": "Analytics & Reporting Service 6",
+      "endpoint": "/api/vanta/guided/analytics_&_reporting/6",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Analytics & ReportingComponent6",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_044": {
+      "name": "Analytics & Reporting Service 7",
+      "endpoint": "/api/vanta/guided/analytics_&_reporting/7",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Analytics & ReportingComponent7",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_045": {
+      "name": "Analytics & Reporting Service 8",
+      "endpoint": "/api/vanta/guided/analytics_&_reporting/8",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Analytics & ReportingComponent8",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_046": {
+      "name": "Communication Service 1",
+      "endpoint": "/api/vanta/guided/communication/1",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "CommunicationComponent1",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_047": {
+      "name": "Communication Service 2",
+      "endpoint": "/api/vanta/guided/communication/2",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "CommunicationComponent2",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_048": {
+      "name": "Communication Service 3",
+      "endpoint": "/api/vanta/guided/communication/3",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "CommunicationComponent3",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_049": {
+      "name": "Communication Service 4",
+      "endpoint": "/api/vanta/guided/communication/4",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "CommunicationComponent4",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_050": {
+      "name": "Communication Service 5",
+      "endpoint": "/api/vanta/guided/communication/5",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "CommunicationComponent5",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_051": {
+      "name": "Communication Service 6",
+      "endpoint": "/api/vanta/guided/communication/6",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "CommunicationComponent6",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_052": {
+      "name": "Communication Service 7",
+      "endpoint": "/api/vanta/guided/communication/7",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "CommunicationComponent7",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_053": {
+      "name": "E-commerce Service 1",
+      "endpoint": "/api/vanta/guided/e-commerce/1",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "E-commerceComponent1",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_054": {
+      "name": "E-commerce Service 2",
+      "endpoint": "/api/vanta/guided/e-commerce/2",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "E-commerceComponent2",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_055": {
+      "name": "E-commerce Service 3",
+      "endpoint": "/api/vanta/guided/e-commerce/3",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "E-commerceComponent3",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_056": {
+      "name": "E-commerce Service 4",
+      "endpoint": "/api/vanta/guided/e-commerce/4",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "E-commerceComponent4",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_057": {
+      "name": "E-commerce Service 5",
+      "endpoint": "/api/vanta/guided/e-commerce/5",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "E-commerceComponent5",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_058": {
+      "name": "E-commerce Service 6",
+      "endpoint": "/api/vanta/guided/e-commerce/6",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "E-commerceComponent6",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_059": {
+      "name": "Marketing Automation Service 1",
+      "endpoint": "/api/vanta/guided/marketing_automation/1",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Marketing AutomationComponent1",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_060": {
+      "name": "Marketing Automation Service 2",
+      "endpoint": "/api/vanta/guided/marketing_automation/2",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Marketing AutomationComponent2",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_061": {
+      "name": "Marketing Automation Service 3",
+      "endpoint": "/api/vanta/guided/marketing_automation/3",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Marketing AutomationComponent3",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_062": {
+      "name": "Marketing Automation Service 4",
+      "endpoint": "/api/vanta/guided/marketing_automation/4",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Marketing AutomationComponent4",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_063": {
+      "name": "Marketing Automation Service 5",
+      "endpoint": "/api/vanta/guided/marketing_automation/5",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Marketing AutomationComponent5",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_064": {
+      "name": "Customer Support Service 1",
+      "endpoint": "/api/vanta/guided/customer_support/1",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Customer SupportComponent1",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_065": {
+      "name": "Customer Support Service 2",
+      "endpoint": "/api/vanta/guided/customer_support/2",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Customer SupportComponent2",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_066": {
+      "name": "Customer Support Service 3",
+      "endpoint": "/api/vanta/guided/customer_support/3",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Customer SupportComponent3",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_067": {
+      "name": "Customer Support Service 4",
+      "endpoint": "/api/vanta/guided/customer_support/4",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Customer SupportComponent4",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_068": {
+      "name": "Financial Management Service 1",
+      "endpoint": "/api/vanta/guided/financial_management/1",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Financial ManagementComponent1",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_069": {
+      "name": "Financial Management Service 2",
+      "endpoint": "/api/vanta/guided/financial_management/2",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Financial ManagementComponent2",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_070": {
+      "name": "Financial Management Service 3",
+      "endpoint": "/api/vanta/guided/financial_management/3",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Financial ManagementComponent3",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_071": {
+      "name": "Financial Management Service 4",
+      "endpoint": "/api/vanta/guided/financial_management/4",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Financial ManagementComponent4",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_072": {
+      "name": "Project Management Service 1",
+      "endpoint": "/api/vanta/guided/project_management/1",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Project ManagementComponent1",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_073": {
+      "name": "Project Management Service 2",
+      "endpoint": "/api/vanta/guided/project_management/2",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Project ManagementComponent2",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_074": {
+      "name": "Project Management Service 3",
+      "endpoint": "/api/vanta/guided/project_management/3",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Project ManagementComponent3",
+        "guided_flow": true
+      },
+      "enabled": true
+    },
+    "guided_075": {
+      "name": "Project Management Service 4",
+      "endpoint": "/api/vanta/guided/project_management/4",
+      "protocol": "rest",
+      "mcp_config": {
+        "ui_component": "Project ManagementComponent4",
+        "guided_flow": true
+      },
+      "enabled": true
+    }
+  },
+  "mcp_endpoints": {},
+  "websocket_endpoints": {}
+}

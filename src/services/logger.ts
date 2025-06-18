@@ -17,7 +17,6 @@ interface LogEntry {
     name?: string;
     message: string;
     stack?: string;
-    cause?: unknown;
   };
 }
 
@@ -35,13 +34,12 @@ class Logger {
     return Logger.instance;
   }
 
-  private formatError(error: unknown): { message: string; name?: string; stack?: string; cause?: unknown } {
+  private formatError(error: unknown): { message: string; name?: string; stack?: string } {
     if (error instanceof Error) {
       return {
         name: error.name,
         message: error.message,
-        stack: error.stack,
-        cause: error.cause instanceof Error ? this.formatError(error.cause) : error.cause
+        stack: error.stack
       };
     }
     return { message: String(error) };

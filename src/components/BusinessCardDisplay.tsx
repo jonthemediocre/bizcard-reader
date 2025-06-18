@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Download, Save, User, Building, Mail, Phone, Globe, MapPin } from 'lucide-react';
+import { Download, Save } from 'lucide-react';
 import { BusinessCardData, exportBusinessCard, saveBusinessCard } from '../services/businessCardExtractor';
 
 interface BusinessCardDisplayProps {
@@ -32,10 +32,97 @@ const BusinessCardDisplay: React.FC<BusinessCardDisplayProps> = ({ data, onSave 
     onSave?.();
   };
 
+  const renderPhone = () => {
+    if (!data.phone) return 'Not provided';
+    
+    if (typeof data.phone === 'string') {
+      return data.phone;
+    }
+    
+    if (Array.isArray(data.phone)) {
+      return data.phone.map((phoneItem: any, index: number) => (
+        <div key={index}>
+          {phoneItem.value}
+          {phoneItem.type && <span className="text-gray-500 ml-2">({phoneItem.type})</span>}
+        </div>
+      ));
+    }
+    
+    return 'Not provided';
+  };
+
+  const confidence = data.confidence || 0;
+  const confidencePercentage = Math.round(confidence * 100);
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Business Card Data</h3>
+    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-4">
+        <div className="text-white">
+          <h2 className="text-xl font-bold">{data.name || 'Name not detected'}</h2>
+          {data.title && <p className="text-blue-100">{data.title}</p>}
+          {data.company && <p className="text-blue-100 font-medium">{data.company}</p>}
+        </div>
+      </div>
+      
+      <div className="px-6 py-4">
+        <div className="space-y-3">
+          {data.email && (
+            <div className="flex items-center">
+              <span className="text-gray-600 font-medium w-20">Email:</span>
+              <a href={`mailto:${data.email}`} className="text-blue-600 hover:text-blue-800">
+                {data.email}
+              </a>
+            </div>
+          )}
+          
+          <div className="flex items-center">
+            <span className="text-gray-600 font-medium w-20">Phone:</span>
+            <div className="text-gray-800">
+              {renderPhone()}
+            </div>
+          </div>
+          
+          {data.website && (
+            <div className="flex items-center">
+              <span className="text-gray-600 font-medium w-20">Website:</span>
+              <a 
+                href={data.website} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-blue-600 hover:text-blue-800"
+              >
+                {data.website}
+              </a>
+            </div>
+          )}
+          
+          {data.address && (
+            <div className="flex items-start">
+              <span className="text-gray-600 font-medium w-20">Address:</span>
+              <span className="text-gray-800">{data.address}</span>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      <div className="px-6 py-3 bg-gray-50 border-t">
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-gray-600">Extraction Confidence</span>
+          <div className="flex items-center">
+            <span className="text-sm font-medium text-gray-900 mr-2">
+              {confidencePercentage}%
+            </span>
+            <div className="w-16 bg-gray-200 rounded-full h-2">
+              <div 
+                className="bg-blue-600 h-2 rounded-full" 
+                style={{ width: `${confidencePercentage}%` }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-between items-start mt-4">
         <div className="flex space-x-2">
           <button
             onClick={handleSave}
@@ -45,95 +132,6 @@ const BusinessCardDisplay: React.FC<BusinessCardDisplayProps> = ({ data, onSave 
             <Save className="w-4 h-4" />
           </button>
         </div>
-      </div>
-
-      <div className="space-y-3">
-        {data.name && (
-          <div className="flex items-center space-x-3">
-            <User className="w-4 h-4 text-gray-400" />
-            <div>
-              <p className="text-sm text-gray-500">Name</p>
-              <p className="font-medium">{data.name}</p>
-            </div>
-          </div>
-        )}
-
-        {data.title && (
-          <div className="flex items-center space-x-3">
-            <Building className="w-4 h-4 text-gray-400" />
-            <div>
-              <p className="text-sm text-gray-500">Title</p>
-              <p className="font-medium">{data.title}</p>
-            </div>
-          </div>
-        )}
-
-        {data.company && (
-          <div className="flex items-center space-x-3">
-            <Building className="w-4 h-4 text-gray-400" />
-            <div>
-              <p className="text-sm text-gray-500">Company</p>
-              <p className="font-medium">{data.company}</p>
-            </div>
-          </div>
-        )}
-
-        {data.email && (
-          <div className="flex items-center space-x-3">
-            <Mail className="w-4 h-4 text-gray-400" />
-            <div>
-              <p className="text-sm text-gray-500">Email</p>
-              <a 
-                href={`mailto:${data.email}`}
-                className="font-medium text-blue-600 hover:text-blue-800"
-              >
-                {data.email}
-              </a>
-            </div>
-          </div>
-        )}
-
-        {data.phone && (
-          <div className="flex items-center space-x-3">
-            <Phone className="w-4 h-4 text-gray-400" />
-            <div>
-              <p className="text-sm text-gray-500">Phone</p>
-              <a 
-                href={`tel:${data.phone}`}
-                className="font-medium text-blue-600 hover:text-blue-800"
-              >
-                {data.phone}
-              </a>
-            </div>
-          </div>
-        )}
-
-        {data.website && (
-          <div className="flex items-center space-x-3">
-            <Globe className="w-4 h-4 text-gray-400" />
-            <div>
-              <p className="text-sm text-gray-500">Website</p>
-              <a 
-                href={data.website.startsWith('http') ? data.website : `https://${data.website}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-blue-600 hover:text-blue-800"
-              >
-                {data.website}
-              </a>
-            </div>
-          </div>
-        )}
-
-        {data.address && (
-          <div className="flex items-center space-x-3">
-            <MapPin className="w-4 h-4 text-gray-400" />
-            <div>
-              <p className="text-sm text-gray-500">Address</p>
-              <p className="font-medium">{data.address}</p>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Export Options */}
@@ -161,22 +159,6 @@ const BusinessCardDisplay: React.FC<BusinessCardDisplayProps> = ({ data, onSave 
             <Download className="w-4 h-4" />
             <span>JSON</span>
           </button>
-        </div>
-      </div>
-
-      {/* Confidence Score */}
-      <div className="mt-4 pt-4 border-t border-gray-200">
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-500">Extraction Confidence</span>
-          <span className="text-sm font-medium text-green-600">
-            {Math.round(data.confidence * 100)}%
-          </span>
-        </div>
-        <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
-          <div 
-            className="bg-green-600 h-2 rounded-full transition-all duration-300"
-            style={{ width: `${data.confidence * 100}%` }}
-          />
         </div>
       </div>
     </div>

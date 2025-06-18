@@ -1,0 +1,188 @@
+# 🧠 GENESIS META LOOP v4Σ.2 – RECURSIVE EXECUTION + IMPLEMENTATION ENGINE
+# Configuration File
+
+version: "v4Σ.2"
+name: "Genesis Meta Loop - Universal App Bootstrap"
+type: "recursive_auditor_fixer_launcher"
+
+execution_mandate:
+  audit_must_trigger_fixes: true
+  no_audit_without_action: "Audit findings MUST be implemented, not just reported"
+  implementation_required: "Generate actual code fixes for critical gaps"
+  real_code_outputs: true
+
+# 🔄 ENHANCED LOOPS
+loops:
+  Loop_1_Discovery:
+    audit_theplan: analyze_project_definition
+    detect_phase: identify_development_stage
+    gap_analysis: find_critical_blockers
+    
+  Loop_2_Generation:
+    best_of_n_reasoning: generate_solutions
+    delta_compression: optimize_outputs
+    symbolic_alignment: maintain_coherence
+    
+  Loop_3_Validation:
+    quality_gates: enforce_standards
+    test_coverage: verify_functionality
+    compliance_check: audit_requirements
+    
+  Loop_4_Implementation:
+    code_critical_fixes: implement_top_3_blockers
+    test_implementations: verify_fixes_work
+    validate_quality_gates: ensure_standards_met
+    iterate_until_passing: repeat_until_green
+
+# 📋 CORE OUTPUT FILES
+required_outputs:
+  audit_report: "audit_report.md"
+  quality_scorecard: "quality_scorecard.json"
+  next_actions: "next_actions.md"
+  fix_output_dir: "fix_output/"
+  test_output_dir: "__tests__/"
+  ci_cd_dir: ".github/workflows/"
+  todo_log: "dynamic_todo.md"
+
+# 🧠 OPERATOR COMMANDS
+commands:
+  ΔGO_AUDIT:
+    description: "Audit THEPLAN.md + docs + code"
+    focus: "Discovery & Gap Analysis"
+    outputs: ["audit_report.md", "gap_analysis.json"]
+    
+  ΔGO_FIX:
+    description: "Implement fixes for all critical issues"
+    focus: "Generate actual code"
+    outputs: ["fix_output/", "test_files/"]
+    execution_mandate: true
+    
+  ΔGO_TEST:
+    description: "Run tests on recent fixes"
+    focus: "Verify and validate fixes"
+    outputs: ["test_results.json", "coverage_report.md"]
+    
+  ΔGO_COMPLETE:
+    description: "Drive app toward full readiness"
+    focus: "Execution and Closure"
+    recursive: true
+    
+  ΔGO_SHIP:
+    description: "Final deployment + launch readiness"
+    focus: "Deploy"
+    outputs: ["deployment_artifacts/", "ship_checklist.md"]
+    
+  ΔGO_CYCLE:
+    description: "Self-upgrade the prompt structure"
+    focus: "Feedback + Learning"
+    evolution_trigger: true
+
+# 📈 COMPLETION METRICS
+metrics:
+  total_completion:
+    type: "percentage"
+    target: 100
+    calculation: "100 - (gaps.length * 10)"
+    
+  critical_fixes_implemented:
+    type: "boolean"
+    requirement: "All critical gaps must be fixed"
+    
+  quality_gates_passed:
+    type: "boolean"
+    gates: ["tests_passing", "security_audit", "performance_check"]
+    
+  time_forecast_remaining:
+    type: "string"
+    format: "X iterations"
+
+# 🔧 IMPLEMENTATION CATEGORIES
+fix_categories:
+  auth:
+    priority: "critical"
+    templates: ["jwt_auth_system", "auth_middleware", "password_hashing"]
+    tests_required: true
+    
+  security:
+    priority: "critical"
+    templates: ["input_validation", "cors_setup", "helmet_config"]
+    tests_required: true
+    
+  testing:
+    priority: "critical"
+    templates: ["jest_setup", "playwright_config", "test_coverage"]
+    tests_required: false
+    
+  ci_cd:
+    priority: "high"
+    templates: ["github_actions", "deployment_pipeline", "automated_testing"]
+    tests_required: false
+    
+  performance:
+    priority: "medium"
+    templates: ["caching", "optimization", "monitoring"]
+    tests_required: true
+    
+  docs:
+    priority: "low"
+    templates: ["theplan_template", "readme_update", "api_docs"]
+    tests_required: false
+
+# 🧠 MANDATORY BEHAVIOR
+behavior:
+  always_implement_top_3_blockers: true
+  always_output_working_code_files: true
+  log_all_task_deltas_to_todo: true
+  never_stop_at_advice: true
+  repeat_until_quality_gates_pass: true
+
+# 📁 DIRECTORY STRUCTURE
+directories:
+  fix_output: "./fix_output"
+  test_output: "./__tests__"
+  ci_cd: "./.github/workflows"
+  reports: "./reports"
+  logs: "./logs"
+
+# 🔒 QUALITY GATES
+quality_gates:
+  authentication_implemented:
+    check: "JWT or OAuth system exists"
+    critical: true
+    
+  tests_coverage:
+    check: "Minimum 60% test coverage"
+    target: 80
+    
+  security_audit:
+    check: "No critical security vulnerabilities"
+    tools: ["npm audit", "security_scanner"]
+    
+  performance_baseline:
+    check: "Response time < 200ms"
+    monitoring: true
+    
+  documentation_complete:
+    check: "THEPLAN.md and README.md exist"
+    templates_available: true
+
+# 🎯 SUCCESS CRITERIA
+success_criteria:
+  ship_ready: "All quality gates pass + deployment artifacts ready"
+  functionally_complete: "Core features implemented and tested"
+  enterprise_ready: "Security, monitoring, and compliance features active"
+
+# 🔄 EVOLUTION SETTINGS
+evolution:
+  trigger_after_runs: 3
+  version_increment: "minor"
+  learning_from_failures: true
+  prompt_optimization: true
+
+# 📝 LOGGING
+logging:
+  audit_versions: true
+  execution_trace: true
+  fix_implementation_log: true
+  todo_delta_tracking: true
+  performance_metrics: true 

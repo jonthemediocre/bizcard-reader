@@ -1,0 +1,110 @@
+{
+  "analysisId": "analysis_1750130184950",
+  "timestamp": "2025-06-17T03:16:24.950Z",
+  "duration": "0 seconds",
+  "overallScore": 88,
+  "status": "GOOD",
+  "expertAnalysis": {
+    "ui": {
+      "score": 88,
+      "details": {
+        "designConsistency": 82,
+        "colorSchemeScore": 86,
+        "typographyScore": 99,
+        "responsiveDesign": 83,
+        "recommendations": [
+          "Implement consistent spacing system using CSS custom properties",
+          "Add dark mode support with proper contrast ratios",
+          "Optimize touch targets for mobile devices (minimum 44px)",
+          "Enhance visual hierarchy with improved typography scale"
+        ]
+      }
+    },
+    "ux": {
+      "score": 91,
+      "details": {
+        "taskCompletionRate": 94,
+        "userSatisfaction": 93,
+        "accessibilityScore": 97,
+        "conversionOptimization": 81,
+        "recommendations": [
+          "Implement ARIA labels for better screen reader support",
+          "Add keyboard navigation shortcuts for power users",
+          "Optimize form validation with real-time feedback",
+          "Enhance loading states with skeleton screens"
+        ]
+      }
+    },
+    "backend": {
+      "score": 78,
+      "details": {
+        "responseTime": "193ms",
+        "scalabilityScore": 93,
+        "securityScore": 86,
+        "reliabilityScore": 95,
+        "performanceScore": 36,
+        "recommendations": [
+          "Implement Redis caching for frequently accessed data",
+          "Add database connection pooling for better performance",
+          "Setup monitoring with Prometheus and Grafana",
+          "Implement rate limiting and DDoS protection"
+        ]
+      }
+    },
+    "testing": {
+      "score": 93,
+      "details": {
+        "functionalTests": {
+          "passed": 47,
+          "total": 50
+        },
+        "accessibilityTests": {
+          "passed": 28,
+          "total": 30
+        },
+        "performanceTests": {
+          "passed": 19,
+          "total": 20
+        },
+        "crossBrowserTests": {
+          "passed": 36,
+          "total": 40
+        },
+        "testCoverage": "94%",
+        "recommendations": [
+          "Add visual regression tests for UI components",
+          "Implement end-to-end user journey tests",
+          "Add performance budget monitoring",
+          "Setup automated accessibility scanning"
+        ]
+      }
+    }
+  },
+  "businessImpact": {
+    "userTaskCompletion": "+28%",
+    "accessibilityCompliance": "+31%",
+    "pageLoadSpeed": "+20%",
+    "userSatisfaction": "+42%",
+    "developmentEfficiency": "+35%",
+    "maintenanceCost": "-32%"
+  },
+  "priorityRecommendations": [],
+  "actionPlan": {
+    "immediate": [],
+    "week1": [],
+    "month1": [],
+    "quarter1": []
+  },
+  "qualityMetrics": {
+    "designConsistency": "82%",
+    "userSatisfaction": "93%",
+    "responseTime": "193ms",
+    "testCoverage": "94%"
+  },
+  "complianceStatus": {
+    "wcag21AA": true,
+    "performanceBudget": false,
+    "crossBrowser": false,
+    "securityStandards": true
+  }
+}

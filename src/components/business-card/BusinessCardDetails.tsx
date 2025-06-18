@@ -56,7 +56,7 @@ const BusinessCardDetails: React.FC<BusinessCardDetailsProps> = ({
 
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
         <PersonalInfo businessCard={businessCard} />
-        <ContactInfo businessCard={businessCard} />
+        <ContactInfo data={businessCard} />
         {additionalDetails?.companyInfo && (
           <CompanyInfo
             companyName={businessCard.companyName}

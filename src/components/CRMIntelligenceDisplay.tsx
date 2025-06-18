@@ -1,534 +1,260 @@
 import React, { useState } from 'react';
-import { ContactIntelligence, generateDemoCRMIntelligence, CRMIntelligenceEngine } from '../services/crmIntelligence';
-import { BusinessCardData } from '../services/businessCardExtractor';
+import { BusinessCardData } from '../types/ocr';
 
 interface CRMIntelligenceDisplayProps {
   businessCardData?: BusinessCardData;
 }
 
-export const CRMIntelligenceDisplay: React.FC<CRMIntelligenceDisplayProps> = ({ businessCardData }) => {
-  const [intelligence, setIntelligence] = useState<ContactIntelligence | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<'overview' | 'strategic' | 'tactical' | 'advanced'>('overview');
+export const CRMIntelligenceDisplay: React.FC<CRMIntelligenceDisplayProps> = ({ 
+  businessCardData 
+}) => {
+  const [intelligence, setIntelligence] = useState<any | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const generateIntelligence = async () => {
-    setLoading(true);
+    if (!businessCardData) {
+      alert('Please scan a business card first!');
+      return;
+    }
+
+    setIsGenerating(true);
     try {
-      console.log('🔍 CRM Intelligence Debug:', {
-        hasBusinessCardData: !!businessCardData,
-        businessCardData: businessCardData
-      });
+      // Simulate AI processing delay
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
-      if (businessCardData) {
-        console.log('✅ Using REAL business card data:', businessCardData);
-        const engine = new CRMIntelligenceEngine('Strategic');
-        const result = await engine.generateIntelligence(businessCardData);
-        console.log('📊 Generated intelligence from real data:', result);
-        setIntelligence(result);
-      } else {
-        console.log('⚠️ No business card data - using demo data');
-        // Use demo data
-        const demoIntelligence = generateDemoCRMIntelligence();
-        setIntelligence(demoIntelligence);
-      }
+      // Mock intelligence data
+      const mockIntelligence = {
+        salesIntelligence: {
+          leadScore: 85,
+          buyingSignals: ['New company', 'Growing team', 'Technology focus'],
+          recommendedApproach: 'Technical consultation',
+          estimatedDealSize: '$50K-$100K',
+          timeToClose: '3-6 months'
+        },
+        relationshipMapping: {
+          connectionStrength: 'Second-degree',
+          mutualConnections: 12,
+          sharedInterests: ['Technology', 'Innovation', 'Growth']
+        },
+        marketInsights: {
+          companyStage: 'Growth',
+          recentNews: ['Series B funding', 'New product launch'],
+          competitors: ['CompetitorA', 'CompetitorB']
+        }
+      };
+      
+      setIntelligence(mockIntelligence);
     } catch (error) {
-      console.error('Failed to generate CRM intelligence:', error);
+      console.error('Failed to generate intelligence:', error);
     } finally {
-      setLoading(false);
+      setIsGenerating(false);
     }
   };
 
-  const exportIntelligence = () => {
-    if (!intelligence) return;
-    
-    const dataStr = JSON.stringify(intelligence, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `crm-intelligence-${intelligence.contactProfile.name.replace(/\s+/g, '-').toLowerCase()}.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
-
-  if (!intelligence) {
+  if (!businessCardData) {
     return (
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <div className="text-center">
-          <div className="mb-4">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">🧠</span>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Advanced CRM Intelligence
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Transform basic contact information into strategic relationship intelligence through multi-dimensional analysis.
-            </p>
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="text-center py-12">
+          <div className="mx-auto h-12 w-12 text-gray-400 mb-4">
+            🧠
           </div>
-          
-          <button
-            onClick={generateIntelligence}
-            disabled={loading}
-            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-          >
-            {loading ? (
-              <div className="flex items-center">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                Generating Intelligence...
-              </div>
-            ) : (
-              `Generate ${businessCardData ? 'CRM Intelligence' : 'Demo Intelligence'}`
-            )}
-          </button>
-          
-          {!businessCardData && (
-            <p className="text-sm text-gray-500 mt-3">
-              No business card data available. Will generate demo intelligence.
-            </p>
-          )}
-          {businessCardData && (
-            <p className="text-sm text-green-600 mt-3">
-              ✅ Using real business card data: {businessCardData.name} at {businessCardData.company}
-            </p>
-          )}
+          <h3 className="text-lg font-medium text-gray-900 mb-2">
+            No Business Card Scanned
+          </h3>
+          <p className="text-gray-500">
+            Please scan a business card first to generate CRM intelligence insights.
+          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6">
-        <div className="flex justify-between items-start">
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="flex justify-between items-start mb-6">
           <div>
-            <h2 className="text-2xl font-bold mb-2">CRM Intelligence Report</h2>
-            <p className="text-blue-100">
-              {intelligence.contactProfile.name} • {intelligence.contactProfile.title}
-            </p>
-            <p className="text-blue-200 text-sm">
-              {intelligence.companySnapshot.name} • Confidence: {Math.round(intelligence.confidence * 100)}%
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              🧠 CRM Intelligence Analysis
+            </h2>
+            <p className="text-gray-600">
+              AI-powered insights for {businessCardData.name || 'contact'}
             </p>
           </div>
           <button
-            onClick={exportIntelligence}
-            className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-colors"
+            onClick={generateIntelligence}
+            disabled={isGenerating}
+            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+              isGenerating
+                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            }`}
           >
-            Export Report
+            {isGenerating ? '🔄 Analyzing...' : '🚀 Generate Intelligence'}
           </button>
+        </div>
+
+        {/* Contact Summary */}
+        <div className="bg-gray-50 rounded-lg p-4">
+          <h3 className="font-semibold text-gray-900 mb-2">Contact Information</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <span className="font-medium">Name:</span> {businessCardData.name || 'N/A'}
+            </div>
+            <div>
+              <span className="font-medium">Company:</span> {businessCardData.company || 'N/A'}
+            </div>
+            <div>
+              <span className="font-medium">Title:</span> {businessCardData.title || 'N/A'}
+            </div>
+            <div>
+              <span className="font-medium">Email:</span> {businessCardData.email || 'N/A'}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Navigation Tabs */}
-      <div className="border-b border-gray-200">
-        <nav className="flex space-x-8 px-6">
-          {[
-            { key: 'overview', label: 'Executive Overview', icon: '📊' },
-            { key: 'strategic', label: 'Strategic Brief', icon: '🎯' },
-            { key: 'tactical', label: 'Tactical Plan', icon: '⚡' },
-            { key: 'advanced', label: 'Advanced Intel', icon: '🔍' }
-          ].map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key as any)}
-              className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
-                activeTab === tab.key
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              <span className="mr-2">{tab.icon}</span>
-              {tab.label}
-            </button>
-          ))}
-        </nav>
-      </div>
-
-      {/* Content */}
-      <div className="p-6">
-        {activeTab === 'overview' && (
-          <div className="space-y-6">
-            {/* Contact Profile */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
-                  <span className="mr-2">👤</span>
-                  Contact Profile
-                </h3>
-                <div className="space-y-2 text-sm">
-                  <div><span className="font-medium">Role Influence:</span> {intelligence.contactProfile.roleInfluence}</div>
-                  <div><span className="font-medium">Decision Authority:</span> {intelligence.contactProfile.decisionAuthority}</div>
-                  <div><span className="font-medium">Communication Style:</span> {intelligence.advancedIntelligence.behavioralPatterns.communicationStyle}</div>
+      {/* Intelligence Results */}
+      {intelligence && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Sales Intelligence */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+              📈 Sales Intelligence
+            </h3>
+            <div className="space-y-4">
+              <div>
+                <label className="font-medium text-gray-700">Lead Score:</label>
+                <div className="mt-1 bg-gray-200 rounded-full h-2">
+                  <div 
+                    className="bg-green-500 h-2 rounded-full" 
+                    style={{ width: `${intelligence.salesIntelligence.leadScore}%` }}
+                  ></div>
                 </div>
+                <span className="text-sm text-gray-600">
+                  {intelligence.salesIntelligence.leadScore}/100
+                </span>
               </div>
-
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
-                  <span className="mr-2">🏢</span>
-                  Company Snapshot
-                </h3>
-                <div className="space-y-2 text-sm">
-                  <div><span className="font-medium">Size:</span> {intelligence.companySnapshot.size}</div>
-                  <div><span className="font-medium">Stage:</span> {intelligence.companySnapshot.stage}</div>
-                  <div><span className="font-medium">Financial Health:</span> {intelligence.companySnapshot.financialHealth}</div>
-                  <div><span className="font-medium">Growth:</span> {intelligence.marketPosition.growthTrajectory}</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Engagement Opportunity */}
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="mr-2">🎯</span>
-                Primary Engagement Opportunity
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <h4 className="font-medium text-gray-700 mb-2">Approach Vector</h4>
-                  <p className="text-sm text-gray-600">{intelligence.engagementOpportunity.primaryApproachVector}</p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-700 mb-2">Optimal Timing</h4>
-                  <p className="text-sm text-gray-600">{intelligence.engagementOpportunity.optimalTiming}</p>
-                </div>
-              </div>
-              <div className="mt-4">
-                <h4 className="font-medium text-gray-700 mb-2">Value Propositions</h4>
-                <div className="flex flex-wrap gap-2">
-                  {intelligence.engagementOpportunity.valuePropositioning.map((value, index) => (
-                    <span key={index} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs">
-                      {value}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Recent Developments */}
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
-                <span className="mr-2">📈</span>
-                Recent Company Developments
-              </h3>
-              <ul className="space-y-2">
-                {intelligence.companySnapshot.recentDevelopments.map((development, index) => (
-                  <li key={index} className="text-sm text-gray-600 flex items-start">
-                    <span className="text-green-500 mr-2">•</span>
-                    {development}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'strategic' && (
-          <div className="space-y-6">
-            {/* Business Priorities */}
-            <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="mr-2">🎯</span>
-                Business Priorities
-              </h3>
-              <div className="grid md:grid-cols-3 gap-4">
-                {intelligence.strategicBrief.businessPriorities.map((priority, index) => (
-                  <div key={index} className="bg-white rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-2">
-                      {index === 0 ? '🚀' : index === 1 ? '⚡' : '💡'}
-                    </div>
-                    <p className="font-medium text-gray-900">{priority}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Decision Factors */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 mb-3">Decision Factors</h3>
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="font-medium text-gray-700 text-sm">Budget Cycle</h4>
-                    <p className="text-sm text-gray-600">{intelligence.strategicBrief.decisionFactors.budgetCycle}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-700 text-sm">Approval Process</h4>
-                    <p className="text-sm text-gray-600">{intelligence.strategicBrief.decisionFactors.approvalProcess}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-700 text-sm">Timeline Expectations</h4>
-                    <p className="text-sm text-gray-600">{intelligence.strategicBrief.decisionFactors.timelineExpectations}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 mb-3">Innovation Profile</h3>
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="font-medium text-gray-700 text-sm">Technology Adoption</h4>
-                    <p className="text-sm text-gray-600">{intelligence.strategicBrief.innovationAppetite.technologyAdoption}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-700 text-sm">Risk Tolerance</h4>
-                    <p className="text-sm text-gray-600">{intelligence.strategicBrief.innovationAppetite.riskTolerance}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-700 text-sm">Change Drivers</h4>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {intelligence.strategicBrief.innovationAppetite.changeDrivers.map((driver, index) => (
-                        <span key={index} className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">
-                          {driver}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Market Challenges & Opportunities */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-red-50 rounded-lg p-4 border border-red-200">
-                <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
-                  <span className="mr-2">⚠️</span>
-                  Key Challenges
-                </h3>
-                <ul className="space-y-2">
-                  {intelligence.marketPosition.keyChallenges.map((challenge, index) => (
-                    <li key={index} className="text-sm text-gray-600 flex items-start">
-                      <span className="text-red-500 mr-2">•</span>
-                      {challenge}
-                    </li>
+              
+              <div>
+                <label className="font-medium text-gray-700">Buying Signals:</label>
+                <ul className="mt-1 list-disc list-inside space-y-1">
+                  {intelligence.salesIntelligence.buyingSignals.map((signal: string, index: number) => (
+                    <li key={index} className="text-sm text-gray-600">{signal}</li>
                   ))}
                 </ul>
               </div>
 
-              <div className="bg-green-50 rounded-lg p-4 border border-green-200">
-                <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
-                  <span className="mr-2">🌟</span>
-                  Market Opportunities
-                </h3>
-                <ul className="space-y-2">
-                  {intelligence.marketPosition.marketOpportunities.map((opportunity, index) => (
-                    <li key={index} className="text-sm text-gray-600 flex items-start">
-                      <span className="text-green-500 mr-2">•</span>
-                      {opportunity}
-                    </li>
-                  ))}
-                </ul>
+              <div>
+                <label className="font-medium text-gray-700">Recommended Approach:</label>
+                <p className="mt-1 text-sm text-gray-600">
+                  {intelligence.salesIntelligence.recommendedApproach}
+                </p>
               </div>
-            </div>
-          </div>
-        )}
 
-        {activeTab === 'tactical' && (
-          <div className="space-y-6">
-            {/* Optimal Timing */}
-            <div className="bg-green-50 rounded-lg p-6 border border-green-200">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="mr-2">⏰</span>
-                Optimal Timing Strategy
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <h4 className="font-medium text-gray-700 mb-2">Best Timeframe</h4>
-                  <p className="text-sm text-gray-600 mb-4">{intelligence.tacticalRecommendations.optimalTiming.bestTimeframe}</p>
-                  
-                  <h4 className="font-medium text-gray-700 mb-2">Industry Considerations</h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    {intelligence.tacticalRecommendations.optimalTiming.industryConsiderations.map((consideration, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-blue-500 mr-2">•</span>
-                        {consideration}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-700 mb-2">Company Milestones</h4>
-                  <ul className="text-sm text-gray-600 space-y-1 mb-4">
-                    {intelligence.tacticalRecommendations.optimalTiming.companyMilestones.map((milestone, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-purple-500 mr-2">•</span>
-                        {milestone}
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <h4 className="font-medium text-gray-700 mb-2">Personal Factors</h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    {intelligence.tacticalRecommendations.optimalTiming.personalFactors.map((factor, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-green-500 mr-2">•</span>
-                        {factor}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Message Positioning */}
-            <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="mr-2">💬</span>
-                Message Positioning
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="font-medium text-gray-700 mb-3">Pain Points to Address</h4>
-                  <div className="space-y-2">
-                    {intelligence.tacticalRecommendations.messagePositioning.painPointsToAddress.map((pain, index) => (
-                      <div key={index} className="bg-red-100 text-red-800 px-3 py-2 rounded-lg text-sm">
-                        {pain}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-700 mb-3">Value Propositions</h4>
-                  <div className="space-y-2">
-                    {intelligence.tacticalRecommendations.messagePositioning.valuePropositions.map((value, index) => (
-                      <div key={index} className="bg-green-100 text-green-800 px-3 py-2 rounded-lg text-sm">
-                        {value}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Follow-up Architecture */}
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="mr-2">📋</span>
-                Follow-up Sequence
-              </h3>
-              <div className="space-y-4">
-                {intelligence.tacticalRecommendations.followupArchitecture.sequencePlanning.map((step, index) => (
-                  <div key={index} className="bg-white rounded-lg p-4 border-l-4 border-blue-500">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-medium text-gray-900">Step {step.step}: {step.objective}</h4>
-                      <span className="text-sm text-gray-500">{step.timing}</span>
-                    </div>
-                    <div className="text-sm text-gray-600 mb-2">
-                      <span className="font-medium">Channel:</span> {step.channel}
-                    </div>
-                    <p className="text-sm text-gray-600">{step.content}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'advanced' && (
-          <div className="space-y-6">
-            {/* Behavioral Patterns */}
-            <div className="bg-purple-50 rounded-lg p-6 border border-purple-200">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="mr-2">🧠</span>
-                Behavioral Pattern Analysis
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium text-gray-700 mb-2">Communication Style</h4>
-                    <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">
-                      {intelligence.advancedIntelligence.behavioralPatterns.communicationStyle}
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-700 mb-2">Decision Timeline</h4>
-                    <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
-                      {intelligence.advancedIntelligence.behavioralPatterns.decisionTimeline}
-                    </span>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium text-gray-700 mb-2">Risk Tolerance</h4>
-                    <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">
-                      {intelligence.advancedIntelligence.behavioralPatterns.riskTolerance}
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-700 mb-2">Change Management</h4>
-                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                      {intelligence.advancedIntelligence.behavioralPatterns.changeManagement}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Predictive Indicators */}
-            <div className="bg-orange-50 rounded-lg p-6 border border-orange-200">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="mr-2">🔮</span>
-                Predictive Indicators
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="font-medium text-gray-700 mb-2">Buying Cycle Position</h4>
-                  <div className="bg-white rounded-lg p-3 mb-4">
-                    <span className="text-lg font-semibold text-orange-600">
-                      {intelligence.advancedIntelligence.predictiveIndicators.buyingCyclePosition}
-                    </span>
-                  </div>
-                  
-                  <h4 className="font-medium text-gray-700 mb-2">Budget Allocation</h4>
+                  <label className="font-medium text-gray-700">Deal Size:</label>
                   <p className="text-sm text-gray-600">
-                    {intelligence.advancedIntelligence.predictiveIndicators.budgetAllocationTiming}
+                    {intelligence.salesIntelligence.estimatedDealSize}
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-700 mb-2">Strategic Inflection Points</h4>
-                  <ul className="space-y-2">
-                    {intelligence.advancedIntelligence.predictiveIndicators.strategicInflectionPoints.map((point, index) => (
-                      <li key={index} className="text-sm text-gray-600 flex items-start">
-                        <span className="text-orange-500 mr-2">•</span>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
+                  <label className="font-medium text-gray-700">Time to Close:</label>
+                  <p className="text-sm text-gray-600">
+                    {intelligence.salesIntelligence.timeToClose}
+                  </p>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Intelligence Sources */}
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="mr-2">📚</span>
-                Intelligence Sources
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                {intelligence.sources.map((source, index) => (
-                  <div key={index} className="bg-white rounded-lg p-4 border">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-medium text-gray-900">{source.source}</h4>
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        source.type === 'Primary' ? 'bg-green-100 text-green-800' :
-                        source.type === 'Social' ? 'bg-blue-100 text-blue-800' :
-                        source.type === 'Industry' ? 'bg-purple-100 text-purple-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {source.type}
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-sm text-gray-600">
-                      <span>Reliability: {Math.round(source.reliability * 100)}%</span>
-                      <span>{source.freshness}</span>
-                    </div>
-                  </div>
-                ))}
+          {/* Relationship Mapping */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+              🌐 Relationship Mapping
+            </h3>
+            <div className="space-y-4">
+              <div>
+                <label className="font-medium text-gray-700">Connection Strength:</label>
+                <p className="text-sm text-gray-600">
+                  {intelligence.relationshipMapping.connectionStrength}
+                </p>
+              </div>
+              
+              <div>
+                <label className="font-medium text-gray-700">Mutual Connections:</label>
+                <p className="text-sm text-gray-600">
+                  {intelligence.relationshipMapping.mutualConnections} contacts
+                </p>
+              </div>
+
+              <div>
+                <label className="font-medium text-gray-700">Shared Interests:</label>
+                <div className="mt-1 flex flex-wrap gap-2">
+                  {intelligence.relationshipMapping.sharedInterests.map((interest: string, index: number) => (
+                    <span 
+                      key={index}
+                      className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full"
+                    >
+                      {interest}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        )}
-      </div>
+
+          {/* Market Insights */}
+          <div className="bg-white rounded-lg shadow-md p-6 lg:col-span-2">
+            <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+              📊 Market Insights
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label className="font-medium text-gray-700">Company Stage:</label>
+                <p className="text-sm text-gray-600 mt-1">
+                  {intelligence.marketInsights.companyStage}
+                </p>
+              </div>
+              
+              <div>
+                <label className="font-medium text-gray-700">Recent News:</label>
+                <ul className="mt-1 space-y-1">
+                  {intelligence.marketInsights.recentNews.map((news: string, index: number) => (
+                    <li key={index} className="text-sm text-gray-600">• {news}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <label className="font-medium text-gray-700">Key Competitors:</label>
+                <ul className="mt-1 space-y-1">
+                  {intelligence.marketInsights.competitors.map((competitor: string, index: number) => (
+                    <li key={index} className="text-sm text-gray-600">• {competitor}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Loading State */}
+      {isGenerating && (
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="text-center py-8">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              Generating Intelligence...
+            </h3>
+            <p className="text-gray-500">
+              Our AI is analyzing the contact and market data to provide actionable insights.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

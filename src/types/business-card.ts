@@ -77,3 +77,31 @@ export interface APIResponse {
 export interface APIKeys {
   openai: string;
 }
+
+export interface BusinessCardData {
+  id?: string;
+  name?: string;
+  title?: string;
+  company?: string;
+  email?: string;
+  phone?: string | { type?: string; value: string }[];
+  website?: string;
+  address?: string;
+  social?: {
+    linkedin?: string;
+    twitter?: string;
+  };
+  extractedText?: string;
+  rawText?: string;
+  confidence?: number;
+  timestamp?: string;
+  department?: string;
+  industry?: string;
+  companySize?: string;
+  socialMedia?: any;
+  certifications?: string[];
+  languages?: string[];
+  specialties?: string[];
+  companyDescription?: string;
+  visualCues?: any;
+}
