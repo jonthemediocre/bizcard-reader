@@ -106,3 +106,6 @@ genesis-domino-report.json
 # Large documentation files that change frequently
 TECHNICAL_SCRAPING_PATTERNS.md
 FREE_AI_SCRAPING_GUIDE.md
+
+# Cursor IDE configuration (managed by .cursor-central)
+.cursor/

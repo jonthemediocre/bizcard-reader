@@ -1,0 +1,19 @@
+# API Configuration
+API_BASE_URL=https://api.bizcardreader.com
+API_VERSION=v1
+
+# Authentication
+AUTH0_DOMAIN=your-domain.auth0.com
+AUTH0_CLIENT_ID=your-client-id
+
+# Analytics
+MIXPANEL_TOKEN=your-mixpanel-token
+GOOGLE_ANALYTICS_ID=your-ga-id
+
+# Feature Flags
+ENABLE_ENTERPRISE_FEATURES=true
+ENABLE_OFFLINE_MODE=false
+
+# Development
+DEV_MODE=true
+DEBUG_LOGGING=true 

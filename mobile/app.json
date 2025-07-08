@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "BizCard Reader Enterprise",
+    "slug": "bizcard-reader-enterprise",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bizcardreader.enterprise",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app needs access to camera to scan business cards",
+        "NSPhotoLibraryUsageDescription": "This app needs access to photo library to select business card images",
+        "NSContactsUsageDescription": "This app needs access to contacts to save extracted contact information"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.bizcardreader.enterprise",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_CONTACTS",
+        "WRITE_CONTACTS"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-camera",
+      "expo-image-picker",
+      "expo-contacts",
+      "expo-notifications"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "bizcard-reader-enterprise"
+      }
+    },
+    "owner": "bizcard-reader"
+  }
+} 
